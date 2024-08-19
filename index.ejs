@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieApp</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <header>
+        <h1>MovieApp</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/movies">Movies</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Movie List</h2>
+        <ul>
+            <% movies.forEach(function(movie) { %>
+                <li>
+                    <h3><%= movie.title %></h3>
+                    <p>Genre: <%= movie.genre %></p>
+                    <p>Description: <%= movie.description %></p>
+                </li>
+            <% }) %>
+        </ul>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 MovieApp. All rights reserved.</p>
+    </footer>
+</body>
+</html>
