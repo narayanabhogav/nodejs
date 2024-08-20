@@ -40,3 +40,41 @@ app.get('/', async (req, res) => {
     res.status(500).send("Error retrieving movies from the database.");
   }
 });
+app.get('/addmoviepage',function(req,res){
+  res.render('addmoviepage.ejs',{i:1});
+})
+
+
+const addSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  year: { type: Number, required: true },
+  genre: { type: String, required: true },
+  director: { type: String, required: true },
+  rating: { type: Number, required: true },
+  description: { type: String }
+});
+
+const Movies = mongoose.model('Movie', movieSchema);
+
+
+// Handle POST request to add a movie
+app.post('/addmovie', async (req, res) => {
+  const { title, year, genre, director, rating, description } = req.body;
+
+  try {
+      const newMovie = new Movies({
+          title,
+          year,
+          genre,
+          director,
+          rating,
+          description
+      });
+
+      await newMovie.save();
+      res.redirect('/'); // Redirect to the movie list or a success page
+  } catch (error) {
+      console.error('Error adding movie:', error);
+      res.status(500).send('Internal Server Error');
+  }
+});
